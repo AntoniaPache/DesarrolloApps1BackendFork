@@ -1,9 +1,7 @@
 services:
   - type: web
-    name: DesarrolloApps1Backend
+    name: cocinapp-backend
     env: java
-    buildCommand: "./mvnw clean package"
-    startCommand: "java -jar target/Cocinapp-0.0.1-SNAPSHOT.jar"
+    buildCommand: "./mvnw clean package -DskipTests"
+    startCommand: "java -jar target/*.jar"
     plan: free
-    region: oregon
-
