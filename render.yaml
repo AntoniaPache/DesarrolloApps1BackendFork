@@ -3,5 +3,5 @@ services:
     name: cocinapp-backend
     env: java
     buildCommand: "./mvnw clean package -DskipTests"
-    startCommand: "java -jar target/*.jar"
+    startCommand: "java -jar target/Cocinapp-0.0.1-SNAPSHOT.jar"
     plan: free
