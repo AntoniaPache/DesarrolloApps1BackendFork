@@ -222,38 +222,56 @@ public class UsuarioController {
 
 
     
-    @PutMapping("/hacer-alumno") // NO ANDA :(
+    @PutMapping("/hacer-alumno")
     public ResponseEntity<String> convertirEnAlumno(@RequestParam Long idUsuario,
                                                     @RequestBody DatosAlumnoDTO datos) {
         try {
-            // Obtener el usuario actual
-            Usuario usuario = us.obtenerUsuario(idUsuario);
-
-            // Copiar campos comunes del usuario al DTO
-            datos.setAlias(usuario.getAlias());
-            datos.setEmail(usuario.getEmail());
-            datos.setPassword(usuario.getPassword());
-            datos.setNombre(usuario.getNombre());
-            datos.setDireccion(usuario.getDireccion());
-            datos.setAvatar(usuario.getAvatar());
-            datos.setBiografia(usuario.getBiografia());
-
-            // Llamar al service
+            // Llamar directamente al service
             us.convertirEnAlumno(idUsuario, datos);
 
             return ResponseEntity.ok("Ahora sos alumno");
-
         } catch (Exception e) {
             System.out.println("⚠️ Error en /hacer-alumno: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
     }
 
+    
+    
+    @DeleteMapping("/eliminar-pendientes")
+    public ResponseEntity<String> eliminarRegistrosPendientes() {
+        try {
+            us.eliminarRegistrosPendientes();
+            return ResponseEntity.ok("Registros pendientes eliminados con éxito.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al eliminar registros pendientes: " + e.getMessage());
+        }
+    }
+    
+    
+    @GetMapping("/obtener-id-por-mail")
+    public ResponseEntity<?> obtenerIdPorEmail(@RequestParam String email) {
+        try {
+            Long id = us.obtenerIdPorEmail(email);
+            return ResponseEntity.ok(id);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+    
+    
+    @GetMapping("/obtener-rol")
+    public ResponseEntity<?> obtenerRol(@RequestParam Long idUsuario) {
+        try {
+            String rol = us.obtenerRolPorId(idUsuario);
+            return ResponseEntity.ok(rol);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 
-
-
-
-
+    
+    
     // ------------------- CLASES INTERNAS (recomendado mover a un paquete DTO después) -------------------
 
     public static class InicioSesionRequest {

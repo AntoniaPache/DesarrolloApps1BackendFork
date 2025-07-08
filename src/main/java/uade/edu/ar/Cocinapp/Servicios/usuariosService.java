@@ -11,6 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import uade.edu.ar.Cocinapp.DTO.DatosAlumnoDTO;
 import uade.edu.ar.Cocinapp.Entidades.Alumno;
 import uade.edu.ar.Cocinapp.Entidades.RegistroPendiente;
@@ -165,22 +166,25 @@ public class usuariosService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
+    
+    @Transactional
     public void convertirEnAlumno(Long idUsuario, DatosAlumnoDTO datos) {
         Usuario usuario = usuarioRepository.findById(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         // Cambiar el rol
         usuario.setRol(Rol.ALUMNO);
+        usuario.setHabilitado(true);
         usuarioRepository.save(usuario);
 
-        // "Subimos" el usuario a alumno usando el mismo ID
-        Alumno alumno = entityManager.find(Alumno.class, usuario.getIdUsuario());
+        // Crear o actualizar alumno
+        Alumno alumno = entityManager.find(Alumno.class, idUsuario);
         if (alumno == null) {
             alumno = new Alumno();
             alumno.setIdUsuario(usuario.getIdUsuario());
         }
 
-        // Copiamos todos los campos heredados (para estar seguros)
+        // Campos comunes
         alumno.setAlias(usuario.getAlias());
         alumno.setEmail(usuario.getEmail());
         alumno.setPassword(usuario.getPassword());
@@ -191,7 +195,7 @@ public class usuariosService {
         alumno.setRol(Rol.ALUMNO);
         alumno.setHabilitado(true);
 
-        // Campos específicos de Alumno
+        // Campos específicos
         alumno.setFotoDniFrente(datos.getFotoDniFrente());
         alumno.setFotoDniDorso(datos.getFotoDniDorso());
         alumno.setNroTramiteDni(datos.getNroTramiteDni());
@@ -203,7 +207,30 @@ public class usuariosService {
             alumno.setCuentaCorriente(0f);
         }
 
-        // Finalmente, guardamos usando merge
+        // Guardar usando merge para evitar problemas con el id heredado
         entityManager.merge(alumno);
     }
+
+    
+    
+    
+    @Transactional
+    public void eliminarRegistrosPendientes() {
+        registroPendienteRepository.deleteAll();
+    }
+
+    public Long obtenerIdPorEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ese email."));
+        return usuario.getIdUsuario();
+    }
+
+    public String obtenerRolPorId(Long idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ese ID."));
+        return usuario.getRol().name();
+    }
+
+    
+    
 }
