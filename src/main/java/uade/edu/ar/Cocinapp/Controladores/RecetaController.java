@@ -201,4 +201,20 @@ public class RecetaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    
+    
+    //et recetas pendientes para vista admin
+    @GetMapping("/pendientes")
+    public ResponseEntity<?> getRecetasPendientes() {
+        try {
+            List<RecetaResumenDTO> resultado = recetaService.obtenerRecetasPendientes();
+            return ResponseEntity.ok(resultado);
+        } catch (Exception e) {
+            System.out.println("Error al obtener recetas pendientes: " + e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    
+    
 }

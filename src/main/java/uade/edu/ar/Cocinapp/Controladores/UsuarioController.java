@@ -249,27 +249,7 @@ public class UsuarioController {
     }
     
     
-    @GetMapping("/obtener-id-por-mail")
-    public ResponseEntity<?> obtenerIdPorEmail(@RequestParam String email) {
-        try {
-            Long id = us.obtenerIdPorEmail(email);
-            return ResponseEntity.ok(id);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
-        }
-    }
     
-    
-    @GetMapping("/obtener-rol")
-    public ResponseEntity<?> obtenerRol(@RequestParam Long idUsuario) {
-        try {
-            String rol = us.obtenerRolPorId(idUsuario);
-            return ResponseEntity.ok(rol);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
-        }
-    }
-
     
     
     // ------------------- CLASES INTERNAS (recomendado mover a un paquete DTO después) -------------------

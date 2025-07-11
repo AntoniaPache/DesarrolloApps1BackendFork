@@ -38,6 +38,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CursoService {
@@ -61,6 +63,17 @@ public class CursoService {
     
     @Autowired
     private AsistenciaCursoRepository acr;
+    
+    
+    //Genericos getAll
+    
+    public List<Curso> obtenerTodosLosCursos() {
+        return cursoRepo.findAll();
+    }
+
+    public Optional<CronogramaCurso> obtenerCronogramasDeCurso(Long idCurso) {
+        return cronogramaRepo.findById(idCurso);
+    }
     
 
     // devuelve todos los cursos disponibles con datos de curso, sede, fechas y promo

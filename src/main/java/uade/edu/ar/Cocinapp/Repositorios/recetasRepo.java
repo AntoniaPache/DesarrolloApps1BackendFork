@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import uade.edu.ar.Cocinapp.DTO.RecetaResumenDTO;
 import uade.edu.ar.Cocinapp.Entidades.Receta;
 import uade.edu.ar.Cocinapp.Entidades.TipoReceta;
 

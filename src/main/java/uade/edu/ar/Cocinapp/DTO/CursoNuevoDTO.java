@@ -6,5 +6,4 @@ public class CursoNuevoDTO {
     public String requerimientos;
     public int duracion;
     public double precio;
-    public String modalidad;
 }

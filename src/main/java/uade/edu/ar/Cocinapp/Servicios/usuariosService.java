@@ -210,25 +210,11 @@ public class usuariosService {
         // Guardar usando merge para evitar problemas con el id heredado
         entityManager.merge(alumno);
     }
-
-    
     
     
     @Transactional
     public void eliminarRegistrosPendientes() {
         registroPendienteRepository.deleteAll();
-    }
-
-    public Long obtenerIdPorEmail(String email) {
-        Usuario usuario = usuarioRepository.findByEmail(email)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ese email."));
-        return usuario.getIdUsuario();
-    }
-
-    public String obtenerRolPorId(Long idUsuario) {
-        Usuario usuario = usuarioRepository.findById(idUsuario)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ese ID."));
-        return usuario.getRol().name();
     }
 
     

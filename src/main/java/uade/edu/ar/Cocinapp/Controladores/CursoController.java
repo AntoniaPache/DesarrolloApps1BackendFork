@@ -1,6 +1,8 @@
 package uade.edu.ar.Cocinapp.Controladores;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +22,35 @@ public class CursoController {
     
     @Autowired
     private AsistenciaService as;
+    
+    // GetAll de los cursos para el Admin
+    @GetMapping("/GetAll")
+    public ResponseEntity<?> getTodosLosCursos() {
+        try {
+            List<Curso> cursos = cursoService.obtenerTodosLosCursos();
+            return ResponseEntity.ok(cursos);
+        } catch (Exception e) {
+            System.out.println("Error al obtener cursos: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error al obtener los cursos");
+        }
+    }
+    
+    
+    //Traer todos los cronogramas de un curso
+    @GetMapping("/{idCurso}/cronogramas")
+    public ResponseEntity<?> getCronogramasDeCurso(@PathVariable Long idCurso) {
+        try {
+            Optional<CronogramaCurso> cronogramas = cursoService.obtenerCronogramasDeCurso(idCurso);
+            return ResponseEntity.ok(cronogramas);
+        } catch (Exception e) {
+            System.out.println("Error al obtener cronogramas del curso: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error al obtener cronogramas");
+        }
+    }
+
 
     // devuelve la lista de cursos disponibles con info de sede, fechas y promociones
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<?> listarCursos() {
         try {
             return ResponseEntity.ok(cursoService.obtenerCursosDisponibles());
@@ -30,7 +58,7 @@ public class CursoController {
             System.out.println("error al listar cursos: " + e.getMessage());
             return ResponseEntity.status(500).body("error interno");
         }
-    }
+    }*/
 
     // sirve para inscribir un alumno a un curso
     @PostMapping("/inscribirse")
