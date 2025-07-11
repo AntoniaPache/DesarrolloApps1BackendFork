@@ -50,7 +50,7 @@ public class CursoController {
 
 
     // devuelve la lista de cursos disponibles con info de sede, fechas y promociones
-    /*@GetMapping
+    @GetMapping
     public ResponseEntity<?> listarCursos() {
         try {
             return ResponseEntity.ok(cursoService.obtenerCursosDisponibles());
@@ -58,7 +58,7 @@ public class CursoController {
             System.out.println("error al listar cursos: " + e.getMessage());
             return ResponseEntity.status(500).body("error interno");
         }
-    }*/
+    }
 
     // sirve para inscribir un alumno a un curso
     @PostMapping("/inscribirse")

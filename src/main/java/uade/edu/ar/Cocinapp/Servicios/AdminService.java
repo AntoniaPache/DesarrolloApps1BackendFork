@@ -44,7 +44,7 @@ public class AdminService {
         curso.setRequerimientos(dto.requerimientos);
         curso.setDuracion(dto.duracion);
         curso.setPrecio(dto.precio);
-        curso.setModalidad(dto.modalidad);
+        curso.setModalidad("");
         cursoRepo.save(curso);
         System.out.println("curso guardado");
     }
