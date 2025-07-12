@@ -1,7 +1,11 @@
 package uade.edu.ar.Cocinapp.Entidades;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "calificaciones")
 public class Calificacion {
@@ -21,48 +25,10 @@ public class Calificacion {
     private int calificacion;
 
     private String comentarios;
+    
+    private boolean aprobado;
 
     public Calificacion() {}
 
-    // getters y setters
-
-    public Long getIdCalificacion() {
-        return idCalificacion;
-    }
-
-    public void setIdCalificacion(Long idCalificacion) {
-        this.idCalificacion = idCalificacion;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Receta getReceta() {
-        return receta;
-    }
-
-    public void setReceta(Receta receta) {
-        this.receta = receta;
-    }
-
-    public int getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(int calificacion) {
-        this.calificacion = calificacion;
-    }
-
-    public String getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
-    }
+    
 }

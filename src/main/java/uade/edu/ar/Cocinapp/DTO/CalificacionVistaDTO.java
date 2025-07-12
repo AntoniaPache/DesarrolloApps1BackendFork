@@ -5,10 +5,12 @@ public class CalificacionVistaDTO {
     public String aliasUsuario;
     public int calificacion;
     public String comentario;
+    public boolean aprobado;
 
-    public CalificacionVistaDTO(String aliasUsuario, int calificacion, String comentario) {
+    public CalificacionVistaDTO(String aliasUsuario, int calificacion, String comentario, boolean ap) {
         this.aliasUsuario = aliasUsuario;
         this.calificacion = calificacion;
         this.comentario = comentario;
+        this.aprobado = ap;
     }
 }
