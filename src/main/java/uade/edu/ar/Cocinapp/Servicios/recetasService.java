@@ -312,7 +312,7 @@ public class recetasService {
 
         List<RecetaResumenDTO> resultado = new ArrayList<>();
 
-        /*for (Receta r : lista) {
+        for (Receta r : lista) {
             double promedio = calificacionRepo.findAll().stream()
                     .filter(c -> c.getReceta().getIdReceta().equals(r.getIdReceta()))
                     .mapToInt(Calificacion::getCalificacion)
@@ -337,7 +337,7 @@ public class recetasService {
                     promedio,
                     estado
             ));
-        }*/
+        }
 
         return resultado;
     }
