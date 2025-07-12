@@ -1,5 +1,4 @@
 package uade.edu.ar.Cocinapp.DTO;
-package uade.edu.ar.Cocinapp.DTO;
 
 //dto para mostrar una calificacion, por ej cuando se abre una receta se tiene que ver abajo toda la seccion de comentarios y valroaciones
 public class CalificacionVistaDTO {
