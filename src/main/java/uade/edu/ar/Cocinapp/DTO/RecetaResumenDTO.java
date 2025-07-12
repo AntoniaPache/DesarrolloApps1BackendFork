@@ -9,7 +9,7 @@ public class RecetaResumenDTO {
     public String fotoPrincipal;       // url de la imagen
     public String nombreUsuario;       // nickname del autor
     public double promedio; // nuevo campo para que moestremos el promedio de las valoraciones en el feed
-    public String estado; // es opcional porque solo lo usamos en el metodo para traer las recetas del usuario, y que pueda ver en que estado estan
+    //public String estado; // es opcional porque solo lo usamos en el metodo para traer las recetas del usuario, y que pueda ver en que estado estan
 
     // Constructor original (usado en feed )
     public RecetaResumenDTO(Long idReceta, String nombreReceta, String fotoPrincipal,
@@ -24,6 +24,6 @@ public class RecetaResumenDTO {
         this.fotoPrincipal = foto;
         this.nombreUsuario = usuario;
         this.promedio = promedio;
-        this.estado = estado;
+        //this.estado = estado;
     }
 }
