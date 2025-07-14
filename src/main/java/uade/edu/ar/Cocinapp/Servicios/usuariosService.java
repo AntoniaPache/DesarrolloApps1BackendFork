@@ -229,6 +229,27 @@ public class usuariosService {
         return dto;
     }
 
+    
+    @Transactional
+    public void actualizarDatosCuentaAlumno(Long idUsuario, DatosAlumnoDTO datos) {
+        Alumno alumno = alumnoRepository.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("No sos alumno o no existe el alumno"));
+
+        // Actualizamos solo los campos que corresponden
+        alumno.setNumeroTarjeta(datos.getNumeroTarjeta());
+        alumno.setCuentaCorriente(parsearCuentaCorriente(datos.getCuentaCorriente()));
+        alumno.setNroTramiteDni(datos.getNroTramiteDni());
+
+        alumnoRepository.save(alumno);
+    }
+
+    private Float parsearCuentaCorriente(String cuentaCorrienteStr) {
+        try {
+            return Float.parseFloat(cuentaCorrienteStr);
+        } catch (NumberFormatException e) {
+            return 0f;
+        }
+    }
 
     
     
