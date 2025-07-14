@@ -9,5 +9,7 @@ public interface CronogramaCursoRepository extends JpaRepository<CronogramaCurso
 
     // devuelve todos los cronogramas disponibles en una sede específica
     List<CronogramaCurso> findBySede_IdSede(Long idSede);
+
+	List<CronogramaCurso> findByCurso_IdCurso(Long idCurso);
 }
 

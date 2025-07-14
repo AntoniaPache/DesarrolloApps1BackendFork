@@ -249,7 +249,16 @@ public class UsuarioController {
     }
     
     
-    
+    @GetMapping("/datos-cuenta-alumno")
+    public ResponseEntity<?> obtenerDatosCuentaAlumno(@RequestParam Long idUsuario) {
+        try {
+            DatosAlumnoDTO dto = us.obtenerDatosCuentaAlumno(idUsuario);
+            return ResponseEntity.ok(dto);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
+        }
+    }
+
     
     
     // ------------------- CLASES INTERNAS (recomendado mover a un paquete DTO después) -------------------

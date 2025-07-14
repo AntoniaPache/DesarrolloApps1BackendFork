@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class CursoDisponibleDTO {
     public Long idCronograma;
+    public Long idCurso;
     public String descripcionCurso;
     public String modalidad;
     public String sede;
