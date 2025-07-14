@@ -216,6 +216,19 @@ public class usuariosService {
     public void eliminarRegistrosPendientes() {
         registroPendienteRepository.deleteAll();
     }
+    
+    public DatosAlumnoDTO obtenerDatosCuentaAlumno(Long idUsuario) {
+        Alumno alumno = alumnoRepository.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("No sos alumno o no existe el alumno"));
+
+        DatosAlumnoDTO dto = new DatosAlumnoDTO();
+        dto.setNumeroTarjeta(alumno.getNumeroTarjeta());
+        dto.setCuentaCorriente(String.valueOf(alumno.getCuentaCorriente()));
+        dto.setNroTramiteDni(alumno.getNroTramiteDni());
+
+        return dto;
+    }
+
 
     
     
